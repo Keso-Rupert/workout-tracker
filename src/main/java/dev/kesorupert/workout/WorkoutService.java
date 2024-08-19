@@ -1,6 +1,7 @@
 package dev.kesorupert.workout;
 
 import dev.kesorupert.exercise.Exercise;
+import dev.kesorupert.workoutexercise.WorkoutExercise;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -37,6 +38,29 @@ public class WorkoutService {
         } else {
             throw new IllegalArgumentException("Workout or exercise not found");
         }
+    }
+
+    @Transactional
+    public Workout updateWorkout(Long workoutId, Workout newWorkout) {
+        Workout existingWorkout = getWorkout(workoutId);
+        if (existingWorkout != null) {
+            existingWorkout.setTitle(newWorkout.getTitle());
+            existingWorkout.setStartDate(newWorkout.getStartDate());
+            existingWorkout.setEndDate(newWorkout.getEndDate());
+            existingWorkout.setNotes(newWorkout.getNotes());
+
+//            existingWorkout.setWorkoutExercises(newWorkout.getWorkoutExercises());
+//            existingWorkout.setUser(newWorkout.getUser());
+//
+//            for (WorkoutExercise exercise : newWorkout.getWorkoutExercises()) {
+//                exercise.workout = newWorkout;
+//            }
+
+//            newWorkout.setId(existingWorkout.getId());
+            workoutRepository.persist(existingWorkout);
+            return existingWorkout;
+        }
+        return null;
     }
 
     @Transactional

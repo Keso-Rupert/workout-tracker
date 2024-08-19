@@ -17,7 +17,7 @@ public class WorkoutExercise extends PanacheEntityBase {
     public Workout workout;
 
     @ManyToOne
-    @JoinColumn(name = "WorkoutID")
+    @JoinColumn(name = "ExerciseID")
     public Exercise exercise;
 
     private Integer orderInWorkout;

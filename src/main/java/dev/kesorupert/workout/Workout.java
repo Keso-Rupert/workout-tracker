@@ -1,5 +1,6 @@
 package dev.kesorupert.workout;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import dev.kesorupert.user.User;
 import dev.kesorupert.workoutexercise.WorkoutExercise;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
@@ -22,8 +23,12 @@ public class Workout {
     @JoinColumn(name = "UserID")
     public User user;
 
+    public String title;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     public LocalDateTime startDate;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     public LocalDateTime endDate;
 
     public String notes;
@@ -37,6 +42,14 @@ public class Workout {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public User getUser() {

@@ -38,6 +38,17 @@ public class ExerciseResource {
         return Response.status(Response.Status.CREATED).entity(createdExercise).build();
     }
 
+    @PUT
+    @Path("/{id}")
+    public Response updateExercise(@PathParam("id") long existingId, Exercise exercise) {
+        Exercise updatedExercise = exerciseService.updateExercise(existingId, exercise);
+        if (updatedExercise != null) {
+            return Response.ok(updatedExercise).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+    }
+
     @DELETE
     @Path("/{id}")
     public Response deleteExercise(@PathParam("id") long exerciseId) {

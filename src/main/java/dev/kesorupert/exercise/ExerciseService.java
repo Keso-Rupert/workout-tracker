@@ -29,6 +29,20 @@ public class ExerciseService {
     }
 
     @Transactional
+    public Exercise updateExercise(Long existingExerciseId, Exercise newExercise) {
+        Exercise exercise = getExercise(existingExerciseId);
+        if (exercise != null) {
+            exercise.setName(newExercise.getName());
+            exercise.setCategory(newExercise.getCategory());
+            exercise.setTargetMuscleGroup(newExercise.getTargetMuscleGroup());
+
+            Exercise.persist(exercise);
+            return exercise;
+        }
+        return null;
+    }
+
+    @Transactional
     public void deleteExercise(Long id) {
         Exercise exercise = getExercise(id);
         if (exercise != null) {

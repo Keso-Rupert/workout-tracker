@@ -49,6 +49,17 @@ public class WorkoutResource {
         }
     }
 
+    @PUT
+    @Path("/{id}")
+    public Response updateWorkout(@PathParam("id") long id, Workout workout) {
+        Workout updatedWorkout = workoutService.updateWorkout(id, workout);
+        if (updatedWorkout != null) {
+            return Response.ok(updatedWorkout).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+    }
+
     @DELETE
     @Path("/{id}")
     public Response deleteWorkout(@PathParam("id") long workoutId) {

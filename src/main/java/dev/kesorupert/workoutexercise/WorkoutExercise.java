@@ -1,5 +1,6 @@
 package dev.kesorupert.workoutexercise;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import dev.kesorupert.exercise.Exercise;
 import dev.kesorupert.workout.Workout;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
@@ -14,6 +15,7 @@ public class WorkoutExercise extends PanacheEntityBase {
 
     @ManyToOne
     @JoinColumn(name = "WorkoutID")
+    @JsonBackReference
     public Workout workout;
 
     @ManyToOne

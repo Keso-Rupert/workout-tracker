@@ -1,13 +1,11 @@
 package dev.kesorupert.workout;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import dev.kesorupert.user.User;
 import dev.kesorupert.workoutexercise.WorkoutExercise;
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +32,7 @@ public class Workout {
     public String notes;
 
     @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<WorkoutExercise> workoutExercises = new ArrayList<>();
 
     public Long getId() {

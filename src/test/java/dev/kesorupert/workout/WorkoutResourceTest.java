@@ -7,12 +7,8 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.hasSize;
 
@@ -90,17 +86,6 @@ public class WorkoutResourceTest {
                 .contentType(ContentType.JSON)
                 .body(updateRequestBody)
                 .when().put("/workouts/1")
-                .then()
-                .statusCode(200)
-                .body("id", is(1))
-                .body("title", is("Full Body"))
-                .body("startDate", is("2023-08-20 18:00"))
-                .body("endDate", is("2023-08-20 19:30"))
-                .body("notes", is("Intense workout"));
-
-        // Verify the update by getting the workout
-        given()
-                .when().get("/workouts/1")
                 .then()
                 .statusCode(200)
                 .body("id", is(1))

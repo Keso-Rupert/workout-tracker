@@ -2,9 +2,13 @@ package dev.kesorupert.workoutexercise;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import dev.kesorupert.exercise.Exercise;
+import dev.kesorupert.workoutset.WorkoutSet;
 import dev.kesorupert.workout.Workout;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class WorkoutExercise extends PanacheEntityBase {
@@ -21,6 +25,9 @@ public class WorkoutExercise extends PanacheEntityBase {
     @ManyToOne
     @JoinColumn(name = "ExerciseID")
     public Exercise exercise;
+
+    @OneToMany(mappedBy = "workoutExercise", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    public List<WorkoutSet> sets = new ArrayList<>();
 
     private Integer orderInWorkout;
 
@@ -54,5 +61,13 @@ public class WorkoutExercise extends PanacheEntityBase {
 
     public void setOrderInWorkout(Integer orderInWorkout) {
         this.orderInWorkout = orderInWorkout;
+    }
+
+    public List<WorkoutSet> getSets() {
+        return sets;
+    }
+
+    public void setSets(List<WorkoutSet> sets) {
+        this.sets = sets;
     }
 }

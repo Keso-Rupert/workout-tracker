@@ -67,19 +67,6 @@ public class WorkoutResourceTest {
     @Test
     @Order(4)
     public void testUpdateWorkout() {
-        // First, create a workout
-        String createRequestBody = "{\"title\":\"Upper Body\",\"startDate\":\"2023-08-19 21:00\",\"endDate\":\"2023-08-19 22:00\",\"notes\":\"Great session\"}";
-
-        given()
-                .contentType(ContentType.JSON)
-                .body(createRequestBody)
-                .when().post("/workouts")
-                .then()
-                .statusCode(201)
-                .body("id", is(1))
-                .body("title", is("Upper Body"));
-
-        // Now, update the workout
         String updateRequestBody = "{\"title\":\"Full Body\",\"startDate\":\"2023-08-20 18:00\",\"endDate\":\"2023-08-20 19:30\",\"notes\":\"Intense workout\"}";
 
         given()

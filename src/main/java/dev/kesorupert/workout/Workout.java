@@ -31,7 +31,7 @@ public class Workout {
 
     public String notes;
 
-    @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "workout", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<WorkoutExercise> workoutExercises = new ArrayList<>();
 
